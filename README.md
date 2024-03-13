@@ -187,6 +187,14 @@ Power => Factor [^%] Factor
 Factor => [+-] Number | ( Exp ) | Function
 Function => Ident ( ArgList )
 ArgList => Exp , Exp
+```
 
 This parser uses recursive descent.  The language is LR(0), which means Left to Right Associative with zero lookahead symbols.
+
+## Credits
+
+```
+1. James McCaffrey, "The Normal Cumulative Density Function in C#", http://jamesmccaffrey.wordpress.com, 2014.
+```
+   
 
