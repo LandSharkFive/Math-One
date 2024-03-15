@@ -94,6 +94,7 @@ namespace MathOne
         }
 
         // Get Operator List
+
         List<string> GetOpList()
         {
             List<string> list = new List<string>();
@@ -101,7 +102,7 @@ namespace MathOne
             string str = "A ACOS ASIN ATAN ALG ALN CB CDF COS CL CR DEG EN F";
             list.AddRange(str.Split(" ").ToList());
 
-            str = "FAC FL GCF I LCM LG LN MIN MAX NCR ND NPR PD P2 PI R RAD RAN";
+            str = "FAC FL GAU GCF I LCM LG LN MIN MAX NCR ND NPR P2 PD PHI PI R RAD RAN";
             list.AddRange(str.Split(" ").ToList());
 
             str = "RD RND RT S SIN SQ SR STU TAN TAU X2 X3";
@@ -125,13 +126,12 @@ namespace MathOne
             return sb.ToString();
         }
 
-
         public double FuncEval(string name, double[] arg)
         {
             double result = 0;
             double x, y;
 
-            switch(name)
+            switch (name)
             {
                 case "A":
                     result = Math.Abs(arg[0]);
@@ -183,6 +183,9 @@ namespace MathOne
                 case "FL":
                     result = Math.Floor(arg[0]);
                     break;
+                case "GAU":
+                    result = Gauss(arg[0]);
+                    break;
                 case "GCF":
                     result = GCF(arg[0], arg[1]);
                     break;
@@ -213,24 +216,20 @@ namespace MathOne
                 case "NPR":
                     result = Permutations(arg[0], arg[1]);
                     break;
+                case "P2":
+                    result = Math.Pow(2, arg[0]);
+                    break;
                 case "PD":
                     result = PrimeDivisor(arg[0]);
                     break;
-                case "P2":
-                    result = Math.Pow(2, arg[0]);
+                case "PHI":
+                    result = Phi(arg[0]);
                     break;
                 case "PI":
                     result = Math.PI;
                     break;
                 case "R":
-                    if (arg[0] == 0) 
-                    {
-                        throw new ArgumentException("Divide by zero");
-                    }
-                    else
-                    {
-                        result = 1 / arg[0];
-                    }
+                    result = Reciprocal(arg[0]);
                     break;
                 case "RAD":
                     result = Radians(arg[0]);
@@ -245,16 +244,7 @@ namespace MathOne
                     result = rnd.NextDouble();
                     break;
                 case "RT":
-                    x = arg[0];
-                    y = arg[1];
-                    if (y == 0)
-                    {
-                        throw new Exception("Divide by zero");
-                    }
-                    else
-                    {
-                        result = Math.Pow(x, 1 / y);
-                    }
+                    result = Root(arg[0], arg[1]);
                     break;
                 case "S":
                     x = arg[0];
@@ -292,6 +282,25 @@ namespace MathOne
             }
 
             return result;
+        }
+
+
+        private double Reciprocal(double a)
+        {
+            if (a == 0)
+            {
+                throw new ArgumentException("Divide by zero");
+            }
+            return 1 / a;
+        }
+
+        private double Root(double a, double b)
+        {
+            if (b == 0)
+            {
+                throw new Exception("Divide by zero");
+            }
+            return Math.Pow(a, 1 / b);
         }
 
         private static double Radians(double degrees)
@@ -448,7 +457,7 @@ namespace MathOne
         /// <returns>cumulative probability density</returns>
         // Output is always between zero and one.  Z-Score is generally between -4.0 and 4.0.
         // When z is above 4.0, cdf is one. When z is below -4.0, cdf is zero.  
-        private static double CumDensity(double z)
+        public static double CumDensity(double z)
         {
             double p = 0.3275911;
             double a1 = 0.254829592;
@@ -480,7 +489,7 @@ namespace MathOne
 
         private static double Student(double t, double df)
         {
-            // for large int df or double df
+            // For large int df or double df.
 
             // Adapted from ACM algorithm 395
             // Returns 2-tail probability.
@@ -512,7 +521,7 @@ namespace MathOne
         /// </summary>
         /// <param name="z">z-score</param>
         /// <returns>probability density</returns>
-        private static double Gauss(double z)
+        public static double Gauss(double z)
         {
             // input = z-value (-inf to +inf)
             // output = p under Normal curve from -inf to z
@@ -565,6 +574,33 @@ namespace MathOne
                 return (1.0 - p) / 2;
             }
         } // Gauss()
+
+        // Phi is the Cumulative Probability Density Function for a random variable.
+        // John D. Cook
+        public static double Phi(double x)
+        {
+            const double a1 = 0.254829592;
+            const double a2 = -0.284496736;
+            const double a3 = 1.421413741;
+            const double a4 = -1.453152027;
+            const double a5 = 1.061405429;
+            const double p = 0.3275911;
+
+            // Save the sign of x
+            int sign = 1;
+            if (x < 0)
+            {
+                sign = -1;
+            }
+
+            x = Math.Abs(x) / Math.Sqrt(2.0);
+
+            // A&S formula 7.1.26
+            double t = 1.0 / (1.0 + 0.3275911 * x);
+            double y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.Exp(-x * x);
+            return 0.5 * (1.0 + sign * y);
+        }
+
 
         /// <summary>
         /// Normal Distribution (pdf)
@@ -665,7 +701,7 @@ namespace MathOne
         Node Expression()
         {
             var result = Term();
-            while (Current.Type != TokenType.None && (Current.Type == TokenType.Plus || Current.Type == TokenType.Minus)) 
+            while (Current.Type != TokenType.None && (Current.Type == TokenType.Plus || Current.Type == TokenType.Minus))
             {
                 if (Current.Type == TokenType.Plus)
                 {
@@ -705,7 +741,7 @@ namespace MathOne
         Node Power()
         {
             var result = Factor();
-            while (Current.Type != TokenType.None && (Current.Type == TokenType.Power || Current.Type == TokenType.Modulo)) 
+            while (Current.Type != TokenType.None && (Current.Type == TokenType.Power || Current.Type == TokenType.Modulo))
             {
                 if (Current.Type == TokenType.Power)
                 {
@@ -758,7 +794,7 @@ namespace MathOne
                 GetNext();
                 return new MinusNode(Factor());
             }
-            else if (Current.Type == TokenType.Function) 
+            else if (Current.Type == TokenType.Function)
             {
                 return Function(Current.Name);
             }
