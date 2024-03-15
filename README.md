@@ -58,6 +58,7 @@ Enter an empty line.
 | F | Fraction |  F(2.34) |
 | FAC | Factorial | FAC(5) |
 | FL | Floor |  FL(7.63) |
+| GAU | Gauss Distribution | GAU(0.5) |
 | GCF | Greatest Common Factor |  GCF(3, 21) |
 | I | Integer |  I(72.34) |
 | LCM | Least Common Multiple |  LCM(5, 125) |
@@ -68,6 +69,7 @@ Enter an empty line.
 | NPR | Permutations | NPR(6, 2) |
 | P2 | Power of two, 2 ^ a | P2(6) |
 | PD | Prime Divisor | PD(55555) |
+| PHI | Cumulative Density Function | PHI(0.5) |
 | PI | Half rotation in radians 3.14 | PI |
 | R | Reciprocal, 1 / x |  R(16.25) |
 | RAD | Degrees To Rdians |  RAD(0.785) |
