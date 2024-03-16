@@ -72,7 +72,7 @@ Enter an empty line.
 | PHI | Cumulative Density Function | PHI(0.5) |
 | PI | Half rotation in radians 3.14 | PI |
 | R | Reciprocal, 1 / x |  R(16.25) |
-| RAD | Degrees To Rdians |  RAD(0.785) |
+| RAD | Degrees To Radians |  RAD(0.785) |
 | RAN | Random Integer | RAN |
 | RD | Round | RD(3.34) |
 | RND | Random Double Between One and Zero | RND |
@@ -152,7 +152,7 @@ Enter an empty line.
 2
 ```
 
-### Pi
+### PI
 
 ```
 > 6 * PI
