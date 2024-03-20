@@ -1,6 +1,6 @@
 # Math Interpreter One
 
-This project contains a command line expression calculator.   The application reads one line at a time from the command line and calculates a result.  The result is printed to the screen.  The main function is called Eval().  Eval() takes the math expression and does three operations:  Tokenize(), Parse() and Visit().  Use Copy and Paste (Ctrl-C and Shift-Insert) on the command line as needed.
+This project contains a command line expression calculator.   The application reads one line at a time from the command line and prints a result.  The main function is Eval().  Eval() takes the math expression and does three operations:  Tokenize(), Parse() and Visit().  Use Copy and Paste (Ctrl-C and Shift-Insert) on the command line as needed.
 
 ## Install and Build
 
