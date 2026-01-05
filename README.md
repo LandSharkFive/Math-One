@@ -22,12 +22,6 @@ The engine uses a **Recursive Descent Parser** for an **LR(0)** grammar.
 2. **Parse():** Builds a tree based on Left-to-Right associativity and operator precedence.
 3. **Visit():** Traverses the tree to compute the final result.
 
-text
-Exp    => Term [+-] Term
-Term   => Power [*/] Power
-Power  => Factor [^%] Factor
-Factor => [+-] Number | ( Exp ) | Function(ArgList)
-
 ## 🔢 Comprehensive Operator Reference
 
 | Category | Function Codes & Operators |
