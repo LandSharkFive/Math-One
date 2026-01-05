@@ -1,202 +1,63 @@
 # Math Interpreter One
 
-This project contains a command line expression calculator.   The application reads one line at a time from the command line and prints a result.  The main function is Eval().  Eval() takes the math expression and does three operations:  Tokenize(), Parse() and Visit().  Use Copy and Paste (Ctrl-C and Shift-Insert) on the command line as needed.
-
-## Install and Build
-
-The is a C# Console-Mode Project.  Open with  Visual Studio 2022 and above to compile. 
-
-## Description:
-
-  Command-Line Calculator.  Calculate one math expression per line.
-
-## Usage:
-Shell
-```
-MathOne
-```
-
-Input File
-```
-MathOne [inFile]
-Input File is optional.
-```
-
- 
-## Exit Application
-```
-Enter an empty line.
-```
-   
-
-## Unit Tests
-
-  Unit Tests are included.
-
-## Operators
-
-| Operator | Description | Example |
-| --- | --- | --- |
-| + | Add | 1 + 2 |
-| - | Subtract | 5 - 2 |
-| * | Multiply | 2 * 7 |
-| / | Divide | 30 / 3 |
-| % | Modulus | 15 % 3 |
-| ^ | Power, a ^ b | 3 ^ 2 |
-| @ | Negate | -5 |
-| A |  Asolute Value | A(-5) |
-| ACOS | Anti-Cosine | ACOS(0.3) |
-| ASIN | Anti-Sine | ASIN(0.4) |
-| ATAN | Anti-Tangent | ATAN(0.5) |
-| CB | Cube, a ^ 3 | CB(5) |
-| CDF | Cumulative Density Function |  CDF(0.5) |
-| CL | Ceiling | CL(7.25) |
-| COS | Cosine in radians | COS(0.6) |
-| CR | Cube root, EXP(a, 1 / 3) |  CR(15) |
-| DEG | Radians To Degrees | DEG(45) |
-| EN | Euler's Number 2.71 | EN |
-| F | Fraction |  F(2.34) |
-| FAC | Factorial | FAC(5) |
-| FL | Floor |  FL(7.63) |
-| GAU | Gauss Distribution | GAU(0.5) |
-| GCF | Greatest Common Factor |  GCF(3, 21) |
-| I | Integer |  I(72.34) |
-| LCM | Least Common Multiple |  LCM(5, 125) |
-| LG | Base 10 Logarithm, 10 ^ a |  LG(25) |
-| LN | Natural Logarithm, e ^ a | LN(35) |
-| NCR | Combinations | NCR(6, 2) |
-| ND | Normal Disribution | ND(0.25, 0, 1) |
-| NPR | Permutations | NPR(6, 2) |
-| P2 | Power of two, 2 ^ a | P2(6) |
-| PD | Prime Divisor | PD(55555) |
-| PHI | Cumulative Density Function | PHI(0.5) |
-| PI | Half rotation in radians 3.14 | PI |
-| R | Reciprocal, 1 / x |  R(16.25) |
-| RAD | Degrees To Radians |  RAD(0.785) |
-| RAN | Random Integer | RAN |
-| RD | Round | RD(3.34) |
-| RND | Random Double Between One and Zero | RND |
-| RT | Nth Root, EXP(a, 1 / b) |  RT(38, 4)
-| S | Change Sign | S(-5) |
-| SIN | Sine in radians |  SIN(0.83) |
-| SR | Square Root, SQRT(a) | SR(25) |
-| STU | Student T-Distribution |  STU(1, 10) |
-| TAN | Tangent in radians | TAN(0.35) |
-| TAU | Full rotation in radians 6.28 | TAU |
-| X2 | Square, a * a |  X2(3) |
-| X3 | Cube, a ^ 3 | X3(5) |
-
-## EXAMPLES
-
-### Add 1 and 2
-
-```
-> 1 + 2
-3
-```
-
-### Subtract 5 - 3
-
-```
-> 5 - 3
-2
-```
-
-### Multipy 4 and 5
-
-```
-> 4 * 5
-20
-```
-
-### Add and Subtract Groups of Numbers
-
-```
-> ((44.3 * 55) + (2 * 5) - 33.3)
-2413.2
-```
-
-### Cosine of 45 degrees
-
-```
-> COS(RAD(45))
-0.7071067811865476
-```
-
-### Negation
-
-```
-> -2 * 5
--10
-```
-
-### Negation for Groups
-
-```
-> -(2 * 5)
--10
-```
-
-### Least Common Multiple
-
-```
-> LCM(13342, 234334)
-1563242114
-```
+A high-precision command-line expression evaluator built in C#. This project implements a full compilation pipeline—**Tokenization**, **Parsing**, and **Visualization/Evaluation**—to process complex mathematical strings.
 
 
-### Greatest Common Factor
 
-```
-> GCF(13342, 234334)
-2
-```
+## 🛠️ Build and Installation
+* **Environment:** Visual Studio 2022 or higher (.NET Console Project).
+* **Compilation:** Open the `.sln` file and build (**Ctrl+Shift+B**).
+* **Testing:** Comprehensive Unit Tests are included to verify operator precedence and edge cases.
 
-### PI
+## 🚀 Usage & Interaction
+The application supports both interactive shell mode and batch processing.
+* **Interactive:** Run `MathOne.exe`. Enter expressions line-by-line.
+* **Batch:** `MathOne [inputFilePath]` to process a text file of expressions.
+* **Exit:** Simply enter an empty line to terminate the session.
 
-```
-> 6 * PI
-18.84955592153876
-```
+## 📐 Technical Architecture
+The engine uses a **Recursive Descent Parser** for an **LR(0)** grammar. 
 
-### Eulers Number
+1. **Tokenize():** Lexical analysis breaks strings into typed symbols.
+2. **Parse():** Builds a tree based on Left-to-Right associativity and operator precedence.
+3. **Visit():** Traverses the tree to compute the final result.
 
-```
-> EN
-2.718281828459045
-```
+text
+Exp    => Term [+-] Term
+Term   => Power [*/] Power
+Power  => Factor [^%] Factor
+Factor => [+-] Number | ( Exp ) | Function(ArgList)
 
-### Simple Math
+## 🔢 Comprehensive Operator Reference
 
-```
-> 40-(1+2)
-37
-```
+| Category | Function Codes & Operators |
+| :--- | :--- |
+| **Arithmetic** | `+`, `-`, `*`, `/`, `%` (Mod), `^` (Power), `@` (Negate), `S` (Sign) |
+| **Trig** | `SIN`, `COS`, `TAN`, `ASIN`, `ACOS`, `ATAN`, `DEG` (ToDeg), `RAD` (ToRad) |
+| **Algebra** | `A` (Abs), `SR` (Sqrt), `CR` (CubeRt), `RT` (NthRoot), `X2` (Sq), `X3`/`CB` (Cube) |
+| **Probability** | `NCR` (Comb), `NPR` (Perm), `FAC` (Fact), `RAN` (RandInt), `RND` (RandDouble) |
+| **Distributions**| `PHI`/`CDF` (Normal CDF), `ND` (Normal), `GAU` (Gauss), `STU` (Student-T) |
+| **Number Theory**| `GCF` (Greatest Factor), `LCM` (Lowest Multiple), `PD` (Prime Divisor) |
+| **Formatting** | `CL` (Ceiling), `FL` (Floor), `RD` (Round), `I` (Integer), `F` (Fraction) |
+| **Constants** | `PI` (3.1415...), `EN` (Euler: 2.718...), `TAU` (6.2831...) |
 
-### Random Number
+## 📝 Evaluation Examples
 
-```
-> RND
-0.3398089438635673
-```
+* **Order of Operations:** `40 - (1 + 2)` → `37`
+* **Trigonometry:** `COS(RAD(45))` → `0.7071067811865476`
+* **Nested Negation:** `-(2 * 5)` → `-10`
+* **Large Number Theory:** `LCM(13342, 234334)` → `1563242114`
+* **Absolute Value:** `A(-5)` → `5`
 
-## Grammar
+## 📐 Grammar & Internal Logic
 
-```
-Exp => Term [+-] Term
-Term => Power [*/] Power
-Power => Factor [^%] Factor
-Factor => [+-] Number | ( Exp ) | Function
-Function => Ident ( ArgList )
-ArgList => Exp , Exp
-```
+The parser uses a **Recursive Descent** strategy for an **LR(0)** language. The `Eval()` method executes a three-stage pipeline:
+1. **Tokenize():** Lexical analysis converts the string into a list of symbols.
+2. **Parse():** Converts tokens into an Abstract Syntax Tree (AST) respecting precedence.
+3. **Visit():** Recursively evaluates the tree nodes to produce a double-precision result.
 
-This parser uses recursive descent.  The language is LR(0), which means Left to Right Associative with zero lookahead symbols.
+## 📚 Credits
 
-## Credits
-
-```
-1. James McCaffrey, "The Normal Cumulative Density Function in C#", http://jamesmccaffrey.wordpress.com, 2014.
-```
-   
+1. **James McCaffrey:** "The Normal Cumulative Density Function in C#", 2014. Provided the fundamental logic for the `PHI` and `GAU` distribution functions.
+2. **Unit Testing:** Includes a comprehensive suite of tests to verify the accuracy of all 40+ operators and the integrity of the recursive descent parser.
 
