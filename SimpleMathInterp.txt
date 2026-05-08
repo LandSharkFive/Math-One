@@ -1,0 +1,12 @@
+How To Resources
+
+1. "Simple Math Interpreter in C++", Jack Murrow, 2020, https://github.com/jackprogramsjp/CPP-Simple-Math-Interpreter/blob/master/main.cpp
+
+2. "Simple AST in Python", Ruslan Spivak, 2015, https://ruslanspivak.com/lsbasi-part7/ and github.com/rspivak
+
+3. "Simple Math Interpreter in Python",  David Callanan, 2021, CodePlus Channel, https://www.youtube.com/channel/UCUVahoidFA7F3Asfvamrm7w 
+and https://www.youtube.com/watch?v=45epnUwFALo
+
+4. "Math Expression AST",  John Nyingi, Sept 2021, https://dev.to/j0nimost/implementing-a-math-interpreter-using-c-part1-2mf
+
+5. "Math Expression Parser in C++", Hamid Soltani, August 2016, http://csvparser.github.io/mathparser.html
