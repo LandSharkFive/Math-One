@@ -27,7 +27,7 @@ The engine uses a **Recursive Descent Parser** for an **LR(0)** grammar.
 | Category | Function Codes & Operators |
 | :--- | :--- |
 | **Arithmetic** | `+`, `-`, `*`, `/`, `%` (Mod), `^` (Power), `@` (Negate), `S` (Sign) |
-| **Trig** | `SIN`, `COS`, `TAN`, `ASIN`, `ACOS`, `ATAN`, `DEG` (ToDeg), `RAD` (ToRad) |
+| **Trigonometry** | `SIN`, `COS`, `TAN`, `ASIN`, `ACOS`, `ATAN`, `DEG` (ToDeg), `RAD` (ToRad) |
 | **Algebra** | `A` (Abs), `SR` (Sqrt), `CR` (CubeRt), `RT` (NthRoot), `X2` (Sq), `X3`/`CB` (Cube) |
 | **Probability** | `NCR` (Comb), `NPR` (Perm), `FAC` (Fact), `RAN` (RandInt), `RND` (RandDouble) |
 | **Distributions**| `PHI`/`CDF` (Normal CDF), `ND` (Normal), `GAU` (Gauss), `STU` (Student-T) |
